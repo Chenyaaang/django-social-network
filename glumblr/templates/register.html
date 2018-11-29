@@ -1,0 +1,6 @@
+{% extends "base_1.html"%}
+{% block title %}Register Page{% endblock %}
+{% block nav_bar %}{{ block.super }}{% endblock %}
+{% block url %}{% url 'register' %}{% endblock %}
+{% block button %}Register and login{% endblock %}
+{% block cancel_url %}{% url 'register' %}{% endblock %}

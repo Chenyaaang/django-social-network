@@ -1,0 +1,69 @@
+body{
+    background-image: url('/static/background_img.png')
+}
+a{
+	text-decoration: none;
+}
+.errors{
+	color: red;
+	font-size: 15px;
+}
+#grumblr{
+	font-size:20px;
+}
+#intro{
+	font-size:15px; 
+	font-style: oblique;
+	margin-left : 80px;
+	color:yellow;
+}
+#home{
+	margin-left: 300px;
+	margin-top: 10px;
+}
+.other-navs{
+	margin-left: 40px;
+	margin-top: 10px;
+}
+#container{
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 500px;
+	/*border: solid;*/
+	border-radius: 10px;
+	background-color: #e6ffe6
+}
+.surface-img{
+	margin-top: 10px;
+	margin-left: 160px;
+	/*margin-right: auto;*/
+	width: 10%;
+}
+h1{
+	font-size:15px;
+	/*font-family: Comic Sans MS, Comic Sans, cursive;*/
+	margin-left:40px;
+}
+button{
+	width: 80%;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 40px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	background-color: #58ACFA;
+}
+.btn:hover{
+	background-color: #F2F2F2;
+}
+.error{
+	color:red;
+}
+input{
+	margin-top: 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-left: 40px;
+	width: 80%;
+}

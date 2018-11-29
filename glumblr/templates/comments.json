@@ -1,0 +1,14 @@
+{
+  "comments":[
+    {% for comment in comments %}
+    {
+      "id":{{comment.id}},
+      "content":"{{comment.content}}",
+      "time": "{{comment.time}}",
+      "username":"{{comment.user_profile.username}}",
+      "picture":"{{comment.user_profile.picture}}"
+    }
+    {% if not forloop.last %}, {% endif %}
+  {% endfor%}],
+  "id":{{id}}
+}

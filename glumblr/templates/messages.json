@@ -1,0 +1,16 @@
+
+{
+  "max_time":"{{max_time|date:"c"}}",
+  "messages":[
+    {% for message in messages %}
+    {
+      "id":{{message.id}},
+      "deleted":{{message.deleted|lower}},
+      "content":"{{message.content}}",
+      "last_changed":"{{message.last_changed}}",
+      "username":"{{message.user_profile.username}}"
+    }
+    {% if not forloop.last %}, {% endif %}
+  {% endfor%}],
+  "picture":"{{picture}}"
+}

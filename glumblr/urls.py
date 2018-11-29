@@ -1,0 +1,31 @@
+from django.urls import path
+import glumblr.views
+
+urlpatterns=[
+    path('login/', glumblr.views.login, name='login'),
+    path('register/', glumblr.views.register, name='register'),
+    path('confirm/<str:username>/<str:token>', glumblr.views.confirm_registration, name='confirm'),
+    path('forget_password/', glumblr.views.forget_password, name='forget_password'),
+    path('forget/<str:username>/<str:token>', glumblr.views.forget_password_valid, name='forget_password_valid'),
+    path('forget_reset_password/<str:username>', glumblr.views.forget_reset_password, name='forget_reset_password'),
+    path('profile/<str:username>', glumblr.views.profile, name='profile'),
+    path('global_stream/', glumblr.views.global_stream, name='global_stream'),
+    path('photo/<str:username>', glumblr.views.get_photo, name='photo'),
+    path('logout/', glumblr.views.logout, name='logout'),
+    path('edit/', glumblr.views.edit, name='edit'),
+    path('delete/<int:id>', glumblr.views.delete, name='delete'),
+    path('follow/<str:username>', glumblr.views.follow, name='follow'),
+    path('unfollow/<str:username>', glumblr.views.unfollow, name='unfollow'),
+    path('follow_stream/<str:username>', glumblr.views.follow_stream, name='follow_stream'),
+    path('reset/', glumblr.views.reset, name='reset'),
+    path('reset/<str:username>/<str:token>', glumblr.views.reset_password_valid, name='reset_password_valid'),
+    path('change_password/', glumblr.views.change_password, name='change_password'),
+    path('get_global_message/', glumblr.views.get_global_message),
+    path('get_changes_global/<str:time>', glumblr.views.get_changes_global),
+    path('get_profile_message/<str:username>', glumblr.views.get_profile_message),
+    path('get_changes_profile/<str:username>/<str:time>', glumblr.views.get_changes_profile),
+    path('post_message/',glumblr.views.post_message),
+    path('delete_message/<int:id>', glumblr.views.delete_message),
+    path('get_comments/<int:id>', glumblr.views.get_comments),
+    path('post_comment/<int:id>', glumblr.views.post_comment),
+]

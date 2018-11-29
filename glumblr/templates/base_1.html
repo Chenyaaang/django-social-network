@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="test/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	{% load static %}
+	<link rel="stylesheet" href = "{% static 'base_1.css' %}">
+	
+	<title>{% block title %}Login Page{% endblock%}</title>
+	
+
+</head>
+<body>
+	{% block nav_bar%}
+	<div class="w3-bar w3-blue">
+  		<a href="#" class="w3-bar-item w3-hover-grey" id="grumblr"><b>Grumblr</b>
+  		<span id = "intro">Create an interesting nano blogging</span></a>
+  		<a href="#" class="w3-bar-item w3-hover-grey" id = "home"><b>Home</b></a>
+  		<a href="#" class="w3-bar-item w3-hover-grey other-navs" ><b>Find</b></a>
+  		<a href="{% url 'login' %}" class="w3-bar-item w3-hover-grey other-navs"><b>SignIn</b></a>
+  		<a href="{% url 'register' %}" class="w3-bar-item w3-hover-grey other-navs"><b>SignUp</b></a>
+  		<a href="#" class="w3-bar-item w3-hover-grey other-navs"><b>Logout</b></a>
+  	</div>
+  	{% endblock %}
+  	{% for error in form.non_field_errors %}
+	<div class="error">{{ error }}</div>
+	{% endfor %}
+	{% if errors %}
+	<div class="error">{{ errors }}</div>
+	{% endif %}
+  	<div id = "container">
+  		<br>
+		{% block image %}
+  		<div class = "surface-img">
+  			<img src = '../static/login.png'>
+  		</div>
+		{% endblock %}
+  		<form {% block enctype %}{% endblock %}action="{% block url %}{% endblock %}" method="post">
+			{% csrf_token %}
+			{% for field in form.visible_fields %}
+			<h1>{{ field.label_tag }}</h1>
+			{{ field }}
+			<div class="error">{{ field.errors }}</div>
+			{% endfor %}
+			{% for field in form.hidden_field %}
+			{{ field }}
+			{% endfor %}
+
+			<button type="submit" class="btn">{% block button %}{% endblock %}</button>
+		</form>
+		{% block reset_pw %}{% endblock %}
+		<a href="{% block cancel_url %}{% endblock %}"><button class="btn cancel" type="submit">Cancel</button></a>
+
+
+
+		
+	</div>
+</body>

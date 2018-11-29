@@ -1,0 +1,8 @@
+{% extends "base_1.html"%}
+{% block title %}Login Page{% endblock %}
+{% block url %}{% url 'login' %}{% endblock %}
+{% block button %}Login{% endblock %}
+{% block reset_pw %}
+<a href="{% url 'forget_password' %}" style="margin-left:300px;color:red;text-decoration: underline">Forget Password?</a>
+{% endblock %}
+{% block cancel_url %}{% url 'login' %}{% endblock %}

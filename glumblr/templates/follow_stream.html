@@ -1,0 +1,49 @@
+{% extends "base_2.html" %}
+<!-- context: user_profile, messages, request -->
+{% block title %}Follow Stream - {{ user_profile.username }}{% endblock %}
+{% block img %}{{ user_profile.picture }}{% endblock %}
+{% block recent_follows %}{% endblock %}
+{% block post_message %}{% endblock %}
+{% block right_title %}
+    <div class="recent_post">
+        {% if request.user.id == user_profile.id %}
+            Who I follows
+        {% endif %}
+        {% if request.user.id != user_profile.id %}
+            Who {{user_profile.username }} follows
+        {% endif %}
+    </div>
+{% endblock %}
+{% block inside_right_container %}
+    <table>
+    {% for friend in friends %}
+        <td>
+            {% if friend.picture %}
+            <!--<img id="follow_img" src='../static/{{friend.picture}}'>-->
+            <img id="follow_img" src="{% url 'photo' friend.username %}">
+            {% endif %}
+            {% if not friend.picture %}
+            <img id="follow_img" src='../static/photo_id/default.png'>
+            {% endif %}
+        </td>
+        <td width="50px">
+            <a href="{% url 'profile' friend.username %}" id="a_underscore_2">
+                {{friend.username}}
+            </a>
+        </td>
+        </tr><br>
+    {% endfor %}
+    </table>
+    <div class="recent_post" style="margin-top:50px">
+        Followee's Posts
+    </div>
+    {% for msg in message_list %}
+        <div class="timeline-item" date-is='{{ msg.last_changed }}'>
+            <p>
+                <a href="{% url 'profile' msg.user_profile.username %}" id="a_underscore">{{ msg.user_profile.username }}</a>
+                {{ msg.content }}
+            </p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

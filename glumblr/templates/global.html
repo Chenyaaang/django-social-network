@@ -1,0 +1,24 @@
+{% extends "base_2.html" %}
+<!-- context: user_profile, messages, request -->
+{% block script %}
+<script src="/static/js/global.js" type="text/javascript"></script>
+<script src="/static/js/comments.js" type="text/javascript"></script>
+{% endblock %}
+{% block title %}Global Stream Page{% endblock %}
+{% block img %}{{ user_profile.picture }}{% endblock %}
+{% block post_message %}{% endblock %}
+{% block inside_right_container %}
+    <!--<ol id="message-list"></ol>-->
+    <div id="global-message-list"></div>
+    <!--{% for msg in messages %}-->
+        <!--<div class="timeline-item" date-is='{{ msg.time }}'>-->
+            <!--<p>-->
+                <!--<a href="{% url 'profile' msg.user_profile.username %}" id="a_underscore">{{ msg.user_profile.username }}</a>-->
+                <!--{{ msg.content }}-->
+            <!--</p>-->
+        <!--</div>-->
+    <!--{% endfor %}-->
+{% endblock %}
+{% block delete %}{% endblock %}
+{% block follow_stream %}{% endblock %}
+

@@ -1,0 +1,15 @@
+{% extends "base_2.html" %}
+<!-- context: user_profile, messages, request -->
+{% block script %}
+<script src="/static/js/profile.js" type="text/javascript"></script>
+<script src="/static/js/comments.js" type="text/javascript"></script>
+{% endblock %}
+{% block title %}Profile - {{ user_profile.user.username }}{% endblock %}
+{% block img %}{{ user_profile.picture }}{% endblock %}
+{% block no_post %}{% endblock %}
+{% block inside_right_container %}
+    <div id="profile-message-list"></div>
+
+{% endblock %}
+{% block message_owner %}{% endblock %}
+{% block follow_stream %}{% endblock %}

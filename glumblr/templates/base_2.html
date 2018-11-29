@@ -1,0 +1,136 @@
+<!-- context: user_profile, messages, request -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="test/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	{% load static %}
+	<link rel="stylesheet" href = "{% static 'base_2.css' %}">
+
+	<title>{% block title %}{% endblock %}</title>
+	
+</head>
+<body>
+	<div class="w3-bar w3-blue">
+  		<a href="{% url 'global_stream' %}" class="w3-bar-item w3-hover-grey" id="grumblr"><b>Grumblr</b>
+  		<span id = "intro">Create an interesting nano blogging</span></a>
+  		<a href="{% url 'profile' request.user.username %}" class="w3-bar-item w3-hover-grey" id = "home"><b>Home</b></a>
+  		<a href="#" class="w3-bar-item w3-hover-grey other-navs" ><b>Find</b></a>
+  		<!--<a href="{% url 'login' %}" class="w3-bar-item w3-hover-grey other-navs"><b>SignIn</b></a>-->
+  		<!--<a href="{% url 'register' %}" class="w3-bar-item w3-hover-grey other-navs"><b>SignUp</b></a>-->
+  		<a href="{% url 'logout' %}" class="w3-bar-item w3-hover-grey other-navs" id = "login_username"><b>Logout {{request.user.username}}</b></a>
+
+  	</div>
+
+  	<!-- photo page and introduction -->
+
+  	<div class="w3-cell-row">
+  		<div class="w3-container w3-cell" id="left">
+  			{% if user_profile.picture %}
+  			<!--<img src='../static/{% block img %}{% endblock %}'>-->
+			<img src="{% url 'photo' user_profile.username %}">
+  			{% endif %}
+  			{% if not user_profile.picture %}
+  			<img src='../static/photo_id/default.png' id='login_picture'>
+  			{% endif %}
+			<div id="profile_owner" style="margin-left:150px; color:red; font-size:20px">{{ user_profile.username }}</div>
+  			<div id="information">
+  				<!-- image:{{user_profile.picture}}<br> -->
+  				Username: {{ user_profile.username }}<br>
+				First name: {{user_profile.first_name}}<br>
+				Last name: {{user_profile.last_name}}<br>
+				Age: {{user_profile.age}}<br>
+  				Email: {{ user_profile.email }}<br>
+  				Location: {{ user_profile.location }}<br>
+  				Job: {{ user_profile.job }}<br>
+  				{{user_profile.self_intro}}
+  			</div>
+			<!--{{request.user.id}}-->
+			<!--{{user_profile.id}}-->
+  			{% if request.user.id == user_profile.id %}
+			<!--equal-->
+  			<div class="profile">
+  				<a href="{% url 'edit' %}">
+   				<button type="submit" class="btn">Edit</button>
+  				</a>
+  				<a href="{% url 'reset' %}">
+   				<button type="submit" class="btn">Reset Password</button>
+  				</a>
+ 			</div>
+ 			{% endif %}
+ 			{% if request.user.id != user_profile.id %}
+			<!--not equal-->
+ 			<div class="profile">
+ 				{% if follow %}
+  				<a href="{% url 'follow' user_profile.username %}">
+   				<button type="submit" class="btn">Follow</button>
+  				</a>
+  				{% endif %}
+  				{% if unfollow %}
+  				<a href="{% url 'unfollow' user_profile.username %}">
+   				<button type="submit" class="btn">Unfollow</button>
+  				</a>
+  				{% endif %}
+ 			</div>
+ 			{% endif %}
+ 			{% block recent_follows%}
+ 			<div id="recent_follow">
+ 				<h1>Recent follows</h1>
+ 				<a href="{% url 'follow_stream' user_profile.username %}" id="a_underscore_1">
+ 				All follows</a>
+ 				<table>
+ 				{% for friend in friends %}
+ 				<tr>
+ 				<td>
+ 					{% if friend.picture %}
+  					<img id="follow_img" src="{% url 'photo' friend.username %}">
+  					{% endif %}
+  					{% if not friend.picture %}
+  					<img id="follow_img" src='../static/photo_id/default.png'>
+  					{% endif %}
+ 				</td>
+ 				<td width="50px"><a href="{% url 'profile' friend.username %}" id="a_underscore_2">
+ 				{{friend.username}}</a></td>
+ 				</tr><br>
+ 				{% endfor %}
+ 				</table>
+ 			</div>
+ 			{% endblock %}
+ 			
+ 			
+		</div>
+		<div class="w3-container w3-cell" id="right">
+			{% block post_message %}
+			{% if request.user.id == user_profile.id %}
+
+				<input id = "message-field" type="text">
+					<button class="post_message_btn" id="post-message-btn">post</button>
+			{% endif %}
+			{% if request.user.id != user_profile.id %}
+			<br><br>
+			{% endif %}
+			{% endblock %}
+			{% block no_post %}
+			<br><br>
+			{% endblock %}
+			
+			<div class="recent_post">
+				{% block right_title %}
+				Recent Post Messages
+				{% endblock %}
+			</div>
+			<div class="container">
+				{% block inside_right_container %}
+				{% endblock %}
+			</div>	
+		</div>
+	</div>
+
+<!--{% load static %}	-->
+<script src="/static/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	{%block script %}{% endblock %}
+
+</body>
+
+</html>
